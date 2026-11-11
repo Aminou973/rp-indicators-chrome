@@ -22,7 +22,7 @@ Got tired of flipping back to TradingView to check the ranges, so I put the rP 3
 3. Load unpacked → pick the folder
 4. Open your chart, panel's top right
 
-Page with screenshots: https://aminou973.github.io/rp-indicators-chrome/
+Page with screenshots: https://aminou973.github.io/tiltguard/#rp
 
 Want other colors, levels or symbols? There's a CUSTOMIZE file in the repo with a prompt you can drop into Claude/ChatGPT and it'll change it for you.
 
