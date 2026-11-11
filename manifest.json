@@ -1,0 +1,62 @@
+{
+  "manifest_version": 3,
+  "name": "rP Indicators",
+  "version": "0.4.1",
+  "description": "rP range 3/5/60 + screener as a floating panel on web trading terminals. Display only, never places orders.",
+  "permissions": [
+    "storage",
+    "scripting",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://query1.finance.yahoo.com/*",
+    "https://api.binance.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Show the rP panel on this page"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.tradingview.com/*",
+        "https://*.tradovate.com/*",
+        "https://*.topstepx.com/*",
+        "https://topstepx.com/*",
+        "https://*.vest.exchange/*",
+        "https://*.vestmarkets.com/*",
+        "https://*.hyperprop.com/*",
+        "https://hyperprop.com/*",
+        "https://*.ninjatrader.com/*"
+      ],
+      "js": [
+        "rp.js",
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://*.tradingview.com/*",
+        "https://*.tradovate.com/*",
+        "https://*.topstepx.com/*",
+        "https://topstepx.com/*",
+        "https://*.vest.exchange/*",
+        "https://*.vestmarkets.com/*",
+        "https://*.hyperprop.com/*",
+        "https://hyperprop.com/*",
+        "https://*.ninjatrader.com/*"
+      ],
+      "js": [
+        "tv-hook.js",
+        "axis-hook.js"
+      ],
+      "world": "MAIN",
+      "all_frames": true,
+      "run_at": "document_start",
+      "match_about_blank": true
+    }
+  ]
+}

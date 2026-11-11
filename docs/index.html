@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>rP Indicators for Chrome</title>
+<meta name="description" content="The rP range 3/5/60 indicator and screener on Vest, NinjaTrader Web, TopstepX and other web charts. Free Chrome extension, display only.">
+<style>
+  :root { --bg:#0e1117; --card:#151a23; --line:#232a36; --tx:#d6dae2; --mut:#8a93a3; --up:#22c55e; --dn:#ef4444; --y:#facc15; }
+  * { box-sizing:border-box }
+  body { margin:0; background:var(--bg); color:var(--tx); font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif }
+  .wrap { max-width:980px; margin:0 auto; padding:0 20px }
+  header { padding:64px 0 28px }
+  h1 { font-size:clamp(30px,5vw,46px); line-height:1.1; margin:0 0 14px; letter-spacing:-.02em }
+  h1 .u { color:var(--up) } h1 .d { color:var(--dn) }
+  .lead { color:var(--mut); font-size:19px; max-width:640px; margin:0 0 26px }
+  .btns { display:flex; gap:12px; flex-wrap:wrap }
+  .btn { display:inline-block; padding:11px 18px; border-radius:8px; text-decoration:none; font-weight:600; border:1px solid var(--line); color:var(--tx) }
+  .btn.main { background:var(--up); border-color:var(--up); color:#06210f }
+  .shot { margin:34px 0 8px; border:1px solid var(--line); border-radius:10px; overflow:hidden }
+  .shot img { display:block; width:100% }
+  .cap { color:var(--mut); font-size:14px; margin:0 0 40px }
+  h2 { font-size:24px; margin:48px 0 14px }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px 18px }
+  .card h3 { margin:0 0 6px; font-size:16px } .card p { margin:0; color:var(--mut); font-size:15px }
+  table { width:100%; border-collapse:collapse; font-size:15px }
+  th, td { text-align:left; padding:10px 8px; border-bottom:1px solid var(--line); vertical-align:top }
+  th { color:var(--mut); font-weight:500 }
+  .ok { color:var(--up) } .warn { color:var(--y) } .no { color:var(--dn) }
+  ol li { margin:6px 0 } code { background:var(--card); border:1px solid var(--line); border-radius:4px; padding:1px 5px; font-size:14px }
+  footer { color:var(--mut); font-size:14px; padding:50px 0 60px; border-top:1px solid var(--line); margin-top:60px }
+  a { color:#7cc4ff }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Your rP ranges, <span class="u">on</span> <span class="d">every</span> chart.</h1>
+  <p class="lead">The rP range 3/5/60 indicator and the screener, pulled out of TradingView and onto Vest, NinjaTrader Web, TopstepX and other web terminals. Same rules, same look, live data from the chart you're already on.</p>
+  <div class="btns">
+    <a class="btn main" href="https://github.com/Aminou973/rp-indicators-chrome/archive/refs/heads/main.zip">Download the extension</a>
+    <a class="btn" href="https://github.com/Aminou973/rp-indicators-chrome">View on GitHub</a>
+  </div>
+  <div class="shot"><img src="screenshot-vest.png" alt="NQ 1 minute chart on Vest with the rP 3m, 5m and 60m step lines, the 60m 40 to 60 percent zone, flip marks and the floating rP panel"></div>
+  <p class="cap">NQ on Vest, 1m chart. 3m / 5m / 60m ranges drawn like the Pine, panel top right.</p>
+</header>
+
+<h2>What you get</h2>
+<div class="grid">
+  <div class="card"><h3>The ranges on the chart</h3><p>3m, 5m and 60m step lines with H, L and 50%, the 60m 40–60% zone, ▲/▼ flips, L / S setups and the labels on the right.</p></div>
+  <div class="card"><h3>The screener</h3><p>NQ, ES, YM, RTY, GC, CL, BTC: 3m / 5m / 60m direction, which 60m levels got touched, setup and sweep status.</p></div>
+  <div class="card"><h3>No-trade warnings</h3><p>04:00 move, equity open, and CPI / NFP / PPI / FOMC days, plus a countdown to the next one.</p></div>
+  <div class="card"><h3>Display only</h3><p>It reads and draws. It never places, moves or cancels an order.</p></div>
+</div>
+
+<h2>The rules, quickly</h2>
+<div class="grid">
+  <div class="card"><h3>Range</h3><p>A candle that closes beyond the range starts a new range in that direction, built from that candle's high and low. Wicks don't count.</p></div>
+  <div class="card"><h3>Setup</h3><p>Price touches the 60m 40, 50 or 60%. Then, within 2 hours, the 3m or 5m flips in the 60m direction.</p></div>
+  <div class="card"><h3>Sweep</h3><p>Price trades past a 60m edge against its direction, then a 3m or 5m flip closes back inside.</p></div>
+</div>
+
+<h2>Where it works</h2>
+<table>
+  <tr><th>Platform</th><th>Status</th><th>What you get</th></tr>
+  <tr><td>TradingView</td><td class="ok">Works</td><td>Full drawing, live. (You can also just use the Pine there.)</td></tr>
+  <tr><td>Vest</td><td class="ok">Works</td><td>Full drawing, live from the chart</td></tr>
+  <tr><td>NinjaTrader Web</td><td class="ok">Works</td><td>Full drawing, live 1m from its own feed, so the 5m shows on any timeframe</td></tr>
+  <tr><td>TopstepX</td><td class="warn">Not tested yet</td><td>Same chart engine as Vest, so it should give the full drawing</td></tr>
+  <tr><td>HyperProp</td><td class="ok">Works</td><td>Current levels that follow the price axis. There's also a native HyperProp version of the indicator we keep updated, use that one there.</td></tr>
+  <tr><td>Tradovate Classic</td><td class="no">No lines</td><td>Its chart is WebGL, nothing to hook into. Log into NinjaTrader Web with the same account and you get everything.</td></tr>
+</table>
+
+<h2>Install</h2>
+<ol>
+  <li><a href="https://github.com/Aminou973/rp-indicators-chrome/archive/refs/heads/main.zip">Download the zip</a> and unzip it somewhere you'll keep it.</li>
+  <li>Open <code>chrome://extensions</code> and turn on <b>Developer mode</b> (top right).</li>
+  <li>Click <b>Load unpacked</b> and pick the unzipped folder.</li>
+  <li>Open your chart. The panel shows up top right, drag it wherever you like. On a site it doesn't know, click the extension icon.</li>
+</ol>
+<p>Updating: replace the folder, hit reload on the extension, refresh your chart tabs. The version shows in the panel header.</p>
+
+<h2>Make it yours</h2>
+<p>Colors, the 40/60 levels, the setup window, sessions, news dates, your symbol list: it's all plain JavaScript, no build step. <a href="https://github.com/Aminou973/rp-indicators-chrome/blob/main/CUSTOMIZE.md">CUSTOMIZE.md</a> says where each setting lives, and it has a prompt you can hand to Claude or any AI to make the change for you.</p>
+
+<h2>Good to know</h2>
+<ul>
+  <li>The screener rows for futures use a free public feed that runs about 10 minutes behind. The symbol on your chart is live where the platform allows it.</li>
+  <li>On a 3m chart with TradingView or Vest, the 5m range can't be built from 3m candles. Use a 1m chart and everything is live.</li>
+  <li>The news calendar runs to December 2027.</li>
+</ul>
+
+<footer>
+  Made by @Minoux with the rangeProb (rP) range engine. MPL-2.0. Not financial advice, it's an educational tool. Try it on a sim first.
+</footer>
+</div>
+</body>
+</html>
